@@ -1,0 +1,75 @@
+
+/* Global Effects CSS */
+
+/* --- 1. Cursor Styles (Legacy Sparkle/Dust) --- */
+/* Hide default cursor */
+body, a, button, input, textarea, select, .cursor-pointer {
+    cursor: none !important;
+}
+
+/* Sparkle Particle */
+.cursor-particle {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 9999; /* Updated to be above navbar (2000) for visibility */
+    will-change: transform, opacity;
+}
+
+/* Star/Sparkle Shape Modifier */
+.cursor-particle.star {
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    background: #c9f31d; /* Theme Neon Green */
+}
+
+/* Dust/Dot Shape Modifier */
+.cursor-particle.dust {
+    background: #ffffff;
+}
+
+/* --- 2. Global Background Styles --- */
+/* Constellation Background */
+#globalBackgroundCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Lowest layer */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+}
+
+#globalBackgroundCanvas.loaded {
+    opacity: 1;
+}
+
+/* Ensure content sits above background */
+body {
+    background-color: #050505; /* Deep dark background */
+}
+
+section, footer, .terminal-window, .big-logo-container {
+    position: relative;
+    z-index: 1;
+}
+
+/* Override Section Backgrounds to be transparent to show particles */
+:root {
+    --bgsection: rgba(0, 13, 39, 0.2); /* Semi-transparent dark blue */
+    --body: #050505; /* Match index.html */
+}
+
+/* Force sections to be transparent/semi-transparent */
+.bgsection, .sub__contact {
+    background: var(--bgsection) !important;
+}
+
+/* Fix Navbar Z-Index explicitly */
+.header-section, .menu-fixed {
+    z-index: 2000 !important;
+    pointer-events: auto !important; /* Ensure clickable */
+}

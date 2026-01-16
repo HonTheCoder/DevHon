@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <!--<< Required meta tags >>-->
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <!--<< Title >>-->
+   <title>DevHon</title>
+   <!--<< Favcion >>-->
+   <link rel="shortcut icon" href="assets/img/logo/logo.png">
+   <!--<< Bootstrap min.css >>-->
+   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+   <!--<< Aos animation css >>-->
+   <link rel="stylesheet" href="assets/css/aos.css">
+   <!--<< Main.css >>-->
+   <link rel="stylesheet" href="assets/css/main.css">
+   <!--<< Cursor CSS >>-->
+   <link rel="stylesheet" href="assets/css/cursor_styles.css">
+   <!--<< Global Effects >>-->
+   <link rel="stylesheet" href="assets/css/global-effects.css">
+   <!--<< Robot CSS >>-->
+   <link rel="stylesheet" href="assets/css/robot.css">
+   <!--<< DevHon Animations >>-->
+   <link rel="stylesheet" href="assets/css/devhon_animations.css">
+   <script src="assets/js/global-effects.js"></script>
+   <style>
+      .skills-nav {
+         border-radius: 999px;
+         padding: 8px 16px;
+         background: rgba(201, 243, 29, 0.06);
+         border: 1px solid rgba(201, 243, 29, 0.2);
+      }
+      .skills-nav-label {
+         color: #ffffff;
+         font-size: 16px;
+         font-weight: 500;
+      }
+      .skills-arrow {
+         background: transparent;
+         border: 1px solid #c9f31d;
+         color: #c9f31d;
+         width: 34px;
+         height: 34px;
+         border-radius: 50%;
+         display: inline-flex;
+         align-items: center;
+         justify-content: center;
+         font-size: 16px;
+         transition: all 0.2s ease;
+      }
+      .skills-arrow:hover {
+         background: #c9f31d;
+         color: #050505;
+      }
+      #skillsIndicator {
+         color: #c9f31d;
+         font-size: 14px;
+         font-weight: 500;
+      }
+      .myskill__item.skill-visible-card {
+         background: rgba(201, 243, 29, 0.08);
+         border: 1px solid rgba(201, 243, 29, 0.3);
+         border-radius: 14px;
+         padding: 18px 22px;
+      }
+      .skill-title-strong {
+         color: #ffffff;
+         font-size: 18px;
+         font-weight: 600;
+      }
+      .skill-desc-soft {
+         color: #a0a3bd;
+         font-size: 15px;
+      }
+      .milestones-list {
+         list-style: none;
+         padding: 0;
+         margin: 0;
+      }
+      .milestone-item {
+         display: flex;
+         gap: 14px;
+         align-items: flex-start;
+         padding: 14px 18px;
+         border-radius: 14px;
+         background: rgba(201, 243, 29, 0.04);
+         border: 1px solid rgba(201, 243, 29, 0.2);
+         margin-bottom: 12px;
+      }
+      .milestone-dot {
+         width: 10px;
+         height: 10px;
+         border-radius: 50%;
+         background: #c9f31d;
+         margin-top: 6px;
+      }
+      .milestone-title {
+         color: #ffffff;
+         font-size: 16px;
+         font-weight: 500;
+      }
+      .milestone-meta {
+         color: #a0a3bd;
+         font-size: 14px;
+      }
+      #skillsWrapper {
+         display: block;
+         width: 100%;
+      }
+      #skillsWrapper .skills-nav {
+         width: 97%;
+      }
+      #skillsList {
+         width: 100%;
+         margin-top: 8px;
+      }
+   </style>
+</head>
+<body>
+
+   <!-- Cursor Canvas -->
+   <canvas id="cursorCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;"></canvas>
+
+   <!--<< Header v-1 >>-->
+   <header class="header-section">
+      <div class="container">
+         <div class="header-wrapper">
+            <div class="main__logo">
+               <a href="main.html" class="logo">
+                  <img src="assets/img/logo/logo.png" alt="logo">
+               </a>
+            </div>
+            <ul class="main-menu">
+               <li>
+                  <a href="main.html">
+                     Home
+                  </a>
+               </li>
+               <li>
+                  <a href="#about">
+                     About
+                  </a>
+               </li>
+               <li>
+                  <a href="#prot">
+                     Work
+                  </a>
+               </li>
+               <li>
+                  <a href="contact.html">
+                     Contact
+                  </a>
+               </li>
+            </ul>
+            <div class="menu__components d-flex align-items-center">
+               <a href="contact.html" class="d-flex fw-500 cmn--btn align-items-center gap-2">
+                  <span class="get__text">
+                     Let's Talk
+                  </span>
+                  <span>
+                     <i class="bi bi-arrow-right fz-20"></i>                       
+                  </span>
+               </a>
+               <div class="header-bar d-lg-none">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+               </div>
+               <div class="remove__click">
+                  <i class="bi bi-list"></i>
+               </div>
+            </div>
+         </div>
+      </div>
+   </header>
+   <!--<< Header v-1 >>-->
+   <!--<< banner >>-->
+   <section class="banner__section">
+      <!-- Canvas moved to body for full page effect -->
+   <div class="container">
+      <div class="row g-4 align-items-center">
+         <div class="col-lg-8">
+            <div class="banner__content">
+               <h1 id="devhonTitle" class="devhon-container">
+                 <span class="hone devhon-animate-left">Dev</span><span class="hone devhon-animate-right">Hon</span><br>
+                  <span class="designers" data-text="Developer">Developer</span>
+               </h1>
+               <script>
+                   // Trigger shake effect after animation matches index.html timing
+                   setTimeout(() => {
+                       document.getElementById('devhonTitle').classList.add('shake');
+                   }, 600);
+               </script>
+            </div>
+         </div>
+         <div class="col-lg-4">
+            <div class="banner__thumb" data-aos="fade-up-right" data-aos-duration="300">
+               <!-- Custom CSS Robot -->
+               <div class="robot-container">
+                  <div class="robot-head">
+                     <div class="robot-antenna"></div>
+                     <div class="robot-ear left"></div>
+                     <div class="robot-ear right"></div>
+                     <div class="robot-face">
+                        <div class="robot-eye"><div class="pupil"></div></div>
+                        <div class="robot-eye"><div class="pupil"></div></div>
+                     </div>
+                     <div class="robot-mouth"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   
+</section>
+<!--<< banner >>-->
+
+<!--<< text slide v1 >>-->
+<div class="marquee-wrapper text-slider">
+   <div class="marquee-inner to-left">
+       <ul class="marqee-list d-flex">
+           <li class="marquee-item">
+               <span class="text-slide">Web Developer</span> <span class="stroke-text">Vibe Coder</span>
+               <span class="text-slide">App Developer</span> <span class="stroke-text">AI Enthusiast</span>
+               <span class="text-slide">Game Developer</span> <span class="stroke-text">Web Developer</span>
+               <span class="text-slide">Vibe Coder</span> <span class="stroke-text">App Developer</span>
+               <span class="text-slide">AI Enthusiast</span> <span class="stroke-text">Game Developer</span>
+               <!-- Duplicate for seamless loop -->
+               <span class="text-slide">Web Developer</span> <span class="stroke-text">Vibe Coder</span>
+               <span class="text-slide">App Developer</span> <span class="stroke-text">AI Enthusiast</span>
+               <span class="text-slide">Game Developer</span> <span class="stroke-text">Web Developer</span>
+               <span class="text-slide">Vibe Coder</span> <span class="stroke-text">App Developer</span>
+               <span class="text-slide">AI Enthusiast</span> <span class="stroke-text">Game Developer</span>
+           </li>
+       </ul>
+   </div>
+</div>
+<!--<< text slide v1 >>-->
+
+<!--<< about personal >>-->
+<section class="about__section pt-120 pb-120" id="about">
+   <div class="container">
+      <div class="personal__head text-center">
+         <img src="assets/img/about/section-star.png" class="mb-30" alt="star">
+      </div>
+      <div class="singletab">
+         <ul class="tablinks">
+             <li class="nav-links active">
+                 <button class="tablink">About Me</button>
+             </li>
+             <li class="nav-links">
+                 <button class="tablink">Experience</button>
+             </li>
+             <li class="nav-links">
+                 <button class="tablink">Education</button>
+             </li>
+             <li class="nav-links">
+                 <button class="tablink">Skills</button>
+             </li>
+         </ul>
+         <div class="tabcontents">
+             <div class="tabitem active">
+               <div class="about__v1wrap">
+                  <div class="row g-4 align-items-lg-start align-items-center">
+                     <div class="col-lg-5">
+                        <div class="about__onethumb" data-aos="zoom-in" data-aos-duration="500">
+                           <img src="assets/img/about/pic1.jpg" alt="img">
+                        </div>
+                     </div>
+                     <div class="col-lg-7">
+                        <div class="about__onecontent">
+                           <h2 class="h2-head" data-aos="fade-up"
+                           data-aos-duration="500">
+                              Personal Info
+                           </h2>
+                           <p class="p-descrip" data-aos="fade-up"
+                           data-aos-duration="500">
+                            I'm DevHon, an IT student and developer passionate about turning ideas into functional and meaningful digital experiences.
+                           I work with modern web technologies and enjoy building systems that are practical, efficient, and impactful.
+                           <div class="about__contactwrap">
+                              <div class="row g-4">
+                                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-6" data-aos="zoom-in">
+                                    <div class="abox">
+                                       <div class="about__contbox__item">
+                                          <span class="ptext fz-18 mb-20 d-block">
+                                             Email
+                                          </span>
+                                          <a href="mailto:devhon.contact@gmail.com">devhon.contact@gmail.com</a>
+                                             devhon.contact@gmail.com
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-6" data-aos="zoom-in">
+                                    <div class="abox">
+                                       <div class="about__contbox__item">
+                                          <span class="ptext fz-18 mb-20 d-block">
+                                             Phone
+                                          </span>
+                                          <a href="#0">
+                                             09358360445
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-6" data-aos="zoom-in">
+                                    <div class="abox">
+                                       <div class="about__contbox__item">
+                                          <span class="ptext fz-18 mb-20 d-block">
+                                             Address
+                                          </span>
+                                          <a href="#0">
+                                             Tabaco City, Albay
+                                          </a>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-xxl-6 col-xl-6 col-lg-12 col-md-6" data-aos="zoom-in">
+                                    <div class="abox">
+                                       <div class="about__contbox__item">
+                                          <span class="ptext fz-18 mb-20 d-block">
+                                             Follow
+                                          </span>
+                                          <ul class="d-flex align-items-center gap-2 gap-xl-4">
+                                             <li>
+                                                <a href="https://www.facebook.com/honezekielnoblebognalbal">
+                                                   <i class="bi bi-facebook"></i>
+                                                </a>
+                                             </li>
+                                             <li>
+                                                <a href="https://www.instagram.com/hon.ezekiel_/">
+                                                   <i class="bi bi-instagram"></i>
+                                                </a>
+                                             </li>
+                                             <li>
+                                                <a href="https://github.com/HonTheCoder">
+                                                   <i class="bi bi-github"></i>
+                                                </a>
+                                             </li>
+                                          </ul>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+             </div>
+             <div class="tabitem">
+               <div class="about__v1wrap" id="skillsTab">
+                  <div class="row g-4 align-items-lg-start align-items-center">
+                     <div class="col-lg-5">
+                        <div class="about__onethumb">
+                           <img src="assets/img/about/personal-infothumb.jpg" alt="img">
+                        </div>
+                     </div>
+                     <div class="col-lg-7">
+                        <div class="about__onecontent">
+                           <h2>
+                              My Experience
+                           </h2>
+                           <p>
+                              I’m an Information Technology student and freelance web developer with hands-on experience building websites and systems for real clients. I started freelancing during my 2nd year in college and continue to improve my skills through client work and personal projects.
+                           </p>
+                           <div class="exprience__box mt-30">
+                              <div class="exri__item">
+                                 <span class="fz-18 fw-500 base">
+                                    2022 – Present
+                                 </span>
+                                 <div class="expri__cont">
+                                    <h4 class="mb-15 text-white">
+                                      Freelance Web Developer
+                                    </h4>
+                                 </div>
+                              </div>
+                              <div class="exri__item">
+                                 <span class="fz-18 fw-500 base">
+                                    2023 – Present
+                                 </span>
+                                 <div class="expri__cont">
+                                    <h4 class="mb-15 text-white">
+                                       Web & Software Developer
+                                    </h4>
+                                 </div>
+                              </div>
+                              <div class="exri__item">
+                                 <span class="fz-18 fw-500 base">
+                                    2024 – 2025
+                                 </span>
+                                 <div class="expri__cont">
+                                    <h4 class="mb-15 text-white">
+                                       Capstone Project Lead Developer
+                                    </h4>
+                                 </div>
+                              </div>
+                              <div class="exri__item">
+                                 <span class="fz-18 fw-500 base">
+                                    2024 – 2025
+                                 </span>
+                                 <div class="expri__cont">
+                                    <h4 class="mb-15 text-white">
+                                       Game Developer – Chopmetry
+                                    </h4>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+             </div>
+             <div class="tabitem">
+               <div class="about__v1wrap" id="skillsTab">
+                  <div class="row g-4 align-items-lg-start align-items-center">
+                     <div class="col-lg-5">
+                        <div class="about__onethumb">
+                           <img src="assets/img/about/pic2.jpg" alt="img">
+                        </div>
+                     </div>
+                     <div class="col-lg-7">
+                        <div class="about__onecontent">
+                           <h2>
+                              My Education
+                           </h2>
+                           <p>
+                             Currently pursuing a Bachelor of Science in Information Technology, building a strong foundation in programming, web development, and system design.
+                           </p>
+                           <div class="exprience__box mt-30">
+                              <div class="exri__item">
+                                 <span class="fz-18 fw-500 base">
+                                    2022 – Present
+                                 </span>
+                                 <div class="expri__cont">
+                                    <h4 class="mb-15 text-white">
+                                       Bachelor of Science in Information Technology
+                                    </h4>
+                                    <p class="fz-18 pra d-block">
+                                       Bicol University (Polangui Campus)
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+             </div>
+             <div class="tabitem">
+               <div class="about__v1wrap">
+                  <div class="row g-4 align-items-lg-start align-items-center">
+                     <div class="col-lg-5">
+                        <div class="about__onethumb">
+                           <img src="assets/img/about/pic3.jpg" alt="img">
+                        </div>
+                     </div>
+                     <div class="col-lg-7">
+                        <div class="about__onecontent">
+                           <h2>
+                              My Skills
+                           </h2>
+                           <p>
+                              Skill Levels
+                           </p>
+                           <div class="about__contactwrap" id="skillsWrapper">
+                              <div class="skills-nav d-flex align-items-center justify-content-between mb-4">
+                                 <span class="skills-nav-label">
+                                    Skill Levels
+                                 </span>
+                                 <div class="d-flex align-items-center gap-3">
+                                    <button type="button" class="skills-arrow" id="skillsPrev">
+                                       <i class="bi bi-chevron-left"></i>
+                                    </button>
+                                    <button type="button" class="skills-arrow" id="skillsNext">
+                                       <i class="bi bi-chevron-right"></i>
+                                    </button>
+                                    <span class="ptext fz-16" id="skillsIndicator">
+                                       1 / 4
+                                    </span>
+                                 </div>
+                              </div>
+                              <div class="row g-4" id="skillsList">
+                                 <div class="col-12">
+                                    <div class="abox myskill__item skill-visible-card">
+                                       <div class="mys">
+                                          <span class="ptext fz-18 mb-15 d-block skill-title-strong">
+                                             HTML / CSS / JavaScript – 60%
+                                          </span>
+                                          <p class="fz-16 pra skill-desc-soft">
+                                             Can build and understand websites using AI-assisted workflows
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-12">
+                                    <div class="abox myskill__item skill-visible-card">
+                                       <div class="mys">
+                                          <span class="ptext fz-18 mb-15 d-block skill-title-strong">
+                                             AI Prompting – 80%
+                                          </span>
+                                          <p class="fz-16 pra skill-desc-soft">
+                                             Strong ability to guide AI tools effectively for development tasks
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-12">
+                                    <div class="abox myskill__item skill-visible-card">
+                                       <div class="mys">
+                                          <span class="ptext fz-18 mb-15 d-block skill-title-strong">
+                                             PHP – 55%
+                                          </span>
+                                          <p class="fz-16 pra skill-desc-soft">
+                                             Basic backend logic and form handling
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-12">
+                                    <div class="abox myskill__item skill-visible-card">
+                                       <div class="mys">
+                                          <span class="ptext fz-18 mb-15 d-block skill-title-strong">
+                                             SQL – 55%
+                                          </span>
+                                          <p class="fz-16 pra skill-desc-soft">
+                                             Basic queries and data management
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-12">
+                                    <div class="abox myskill__item skill-visible-card">
+                                       <div class="mys">
+                                          <span class="ptext fz-18 mb-15 d-block skill-title-strong">
+                                             Python – 50%
+                                          </span>
+                                          <p class="fz-16 pra skill-desc-soft">
+                                             Programming fundamentals and simple scripts
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-12">
+                                    <div class="abox myskill__item skill-visible-card">
+                                       <div class="mys">
+                                          <span class="ptext fz-18 mb-15 d-block skill-title-strong">
+                                             C++ – 50%
+                                          </span>
+                                          <p class="fz-16 pra skill-desc-soft">
+                                             Core programming concepts
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                                 <div class="col-12">
+                                    <div class="abox myskill__item skill-visible-card">
+                                       <div class="mys">
+                                          <span class="ptext fz-18 mb-15 d-block skill-title-strong">
+                                             Game Development – 50%
+                                          </span>
+                                          <p class="fz-16 pra skill-desc-soft">
+                                             Basic game logic and mechanics
+                                          </p>
+                                       </div>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+             </div>
+         </div>
+     </div>
+   </div>
+</section>
+<!--<< about personal >>-->
+
+<!--<< text slide v2 >>-->
+<div class="marquee-wrapper text-slider">
+   <div class="marquee-inner to-left">
+       <ul class="marqee-list d-flex">
+           <li class="marquee-item">
+               <span class="text-slide">Web Developer</span> <span class="stroke-text">Vibe Coder</span>
+               <span class="text-slide">App Developer</span> <span class="stroke-text">AI Enthusiast</span>
+               <span class="text-slide">Game Developer</span> <span class="stroke-text">Web Developer</span>
+               <span class="text-slide">Vibe Coder</span> <span class="stroke-text">App Developer</span>
+               <span class="text-slide">AI Enthusiast</span> <span class="stroke-text">Game Developer</span>
+               <!-- Duplicate for seamless loop -->
+               <span class="text-slide">Web Developer</span> <span class="stroke-text">Vibe Coder</span>
+               <span class="text-slide">App Developer</span> <span class="stroke-text">AI Enthusiast</span>
+               <span class="text-slide">Game Developer</span> <span class="stroke-text">Web Developer</span>
+               <span class="text-slide">Vibe Coder</span> <span class="stroke-text">App Developer</span>
+               <span class="text-slide">AI Enthusiast</span> <span class="stroke-text">Game Developer</span>
+           </li>
+       </ul>
+   </div>
+</div>
+<!--<< text slide v2 >>-->
+
+<!--<< our aword >>-->
+<section class="awoard__section">
+   <div class="container">
+      <div class="award__wraper table-responsive" data-aos="fade-up"
+      data-aos-duration="2000">
+         <div class="section__title center mb-60">
+               <h2 class="text-title">Projects & Milestones</h2>
+               <p class="mx-auto" style="max-width: 600px;">
+                  A quick look at the key steps in my journey as a developer.
+               </p>
+         </div>
+         <div class="row justify-content-center">
+            <div class="col-lg-8">
+               <ul class="milestones-list">
+                  <li class="milestone-item">
+                     <span class="milestone-dot"></span>
+                     <div>
+                        <div class="milestone-title">
+                           Started freelancing as a web developer
+                        </div>
+                        <div class="milestone-meta">
+                           2022 – Working with real clients and solving real problems.
+                        </div>
+                     </div>
+                  </li>
+                  <li class="milestone-item">
+                     <span class="milestone-dot"></span>
+                     <div>
+                        <div class="milestone-title">
+                           Developed client websites using PHP, MySQL, and XAMPP
+                        </div>
+                        <div class="milestone-meta">
+                           Built and deployed dynamic sites with custom backend logic.
+                        </div>
+                     </div>
+                  </li>
+                  <li class="milestone-item">
+                     <span class="milestone-dot"></span>
+                     <div>
+                        <div class="milestone-title">
+                           Created and led the development of a capstone system
+                        </div>
+                        <div class="milestone-meta">
+                           Took the lead on planning, building, and presenting a full system.
+                        </div>
+                     </div>
+                  </li>
+                  <li class="milestone-item">
+                     <span class="milestone-dot"></span>
+                     <div>
+                        <div class="milestone-title">
+                           Built Chopmetry, a personal game development project
+                        </div>
+                        <div class="milestone-meta">
+                           2025 – Game project focused on core mechanics and player experience.
+                        </div>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+<!--<< our aword >>-->
+
+<!--<< project one >>-->
+<section class="project__section pt-120 pb-120" id="prot">
+   <div class="container">
+      <div class="project__head text-center">
+         <span class="common__sub" data-aos="fade-down"
+         data-aos-duration="1000">
+           Complete Project 
+         </span>
+         <h2 class="fw-500" data-aos="fade-down"
+         data-aos-duration="2000">
+            Look at my portfolio and give me 
+            your feedback
+         </h2>
+      </div>
+      <div class="row g-4">
+         <div class="col-lg-6 col-md-6">
+            <div class="project__wrapone">
+               <!-- Project 1: Chopmetry -->
+               <div class="project__item cus__mb60" data-aos="fade-up" data-aos-duration="1000">
+                  <a href="https://chopmetry.netlify.app/" target="_blank" class="thumb mb-30">
+                     <img src="assets/img/project/chop.jpg" alt="Chopmetry">
+                  </a>
+                  <div class="content d-flex align-items-center justify-content-between gap-2">
+                     <a href="https://chopmetry.netlify.app/" target="_blank" class="left__cont">
+                        <span class="base mb-2 mb-xxl-3 d-block text-uppercase">
+                           Game Development
+                        </span>
+                        <h3>
+                           Chopmetry
+                        </h3>
+                        <p class="pra fz-16 mt-2">
+                           A casual game project created to explore game mechanics and UI.
+                        </p>
+                     </a>
+                     <a href="https://chopmetry.netlify.app/" target="_blank" class="common__icon">
+                        <i class="bi bi-arrow-up-right"></i>
+                     </a>
+                  </div>
+               </div>
+               
+               <!-- Project 3: HonTheCoder -->
+               <div class="project__item" data-aos="fade-up" data-aos-duration="1000">
+                  <a href="https://honthecoder.netlify.app/" target="_blank" class="thumb mb-30">
+                     <img src="assets/img/project/1stpers.jpg" alt="HonTheCoder">
+                  </a>
+                  <div class="content d-flex align-items-center justify-content-between gap-2">
+                     <a href="https://honthecoder.netlify.app/" target="_blank" class="left__cont">
+                        <span class="base mb-2 mb-xxl-3 d-block text-uppercase">
+                           Personal Website
+                        </span>
+                        <h3>
+                           HonTheCoder
+                        </h3>
+                        <p class="pra fz-16 mt-2">
+                           My first personal website built with pure HTML and CSS.
+                        </p>
+                     </a>
+                     <a href="https://honthecoder.netlify.app/" target="_blank" class="common__icon">
+                        <i class="bi bi-arrow-up-right"></i>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+         
+         <div class="col-lg-6 col-md-6">
+            <div class="project__wraptwo">
+               <!-- Project 2: Quiz Game -->
+               <div class="project__item cus__mb60" data-aos="fade-up" data-aos-duration="2200">
+                  <a href="https://quizzygameskie.netlify.app/" target="_blank" class="thumb mb-30">
+                     <img src="assets/img/project/quiz.jpg" alt="Quiz Game">
+                  </a>
+                  <div class="content d-flex align-items-center justify-content-between gap-2">
+                     <a href="https://quizzygameskie.netlify.app/" target="_blank" class="left__cont">
+                        <span class="base mb-2 mb-xxl-3 d-block text-uppercase">
+                           Web Game
+                        </span>
+                        <h3>
+                           Quizzy Gameskie
+                        </h3>
+                         <p class="pra fz-16 mt-2">
+                           A simple web-based quiz game using HTML, CSS, and JavaScript.
+                        </p>
+                     </a>
+                     <a href="https://quizzygameskie.netlify.app/" target="_blank" class="common__icon">
+                        <i class="bi bi-arrow-up-right"></i>
+                     </a>
+                  </div>
+               </div>
+               
+               <!-- Project 4: HouseHuntPH -->
+               <div class="project__item" data-aos="fade-up" data-aos-duration="2200">
+                  <a href="https://househuntph.netlify.app/" target="_blank" class="thumb mb-30">
+                     <img src="assets/img/project/HH.jpg" alt="HouseHuntPH">
+                  </a>
+                  <div class="content d-flex align-items-center justify-content-between gap-2">
+                     <a href="https://househuntph.netlify.app/" target="_blank" class="left__cont">
+                        <span class="base mb-2 mb-xxl-3 d-block text-uppercase">
+                           Real Estate System
+                        </span>
+                        <h3>
+                           HouseHuntPH
+                        </h3>
+                        <p class="pra fz-16 mt-2">
+                           A real estate website built using PHP, MySQL, and XAMPP.
+                        </p>
+                     </a>
+                     <a href="https://househuntph.netlify.app/" target="_blank" class="common__icon">
+                        <i class="bi bi-arrow-up-right"></i>
+                     </a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+      <!-- Footer Note -->
+      <div class="row mt-5">
+         <div class="col-12 text-center" data-aos="fade-up" data-aos-duration="1000">
+             <p class="pra fz-24">
+                 And many more! <span class="base">These are just some of my samples.</span>
+             </p>
+             <p class="pra fz-18 mt-2">
+                 I also have a lot of WIP (Work In Progress) projects.
+             </p>
+         </div>
+      </div>
+   </div>
+</section>
+<!--<< project one >>-->
+
+<!--<< project metting one >>-->
+<section class="project__metting overhid pt-120 pb-120">
+   <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-7">
+         <div class="pro__metting__content">
+            <div class="project__head">
+               <span class="common__sub" data-aos="fade-down" data-aos-duration="1000">
+                 Need a Project? 
+               </span>
+               <h2 class="fw-500" data-aos="fade-down" data-aos-duration="1600">
+                  Let's work together.
+               </h2>
+            </div>
+            <div class="about__contbox__item pb-30" data-aos="fade-up" data-aos-duration="1000">
+               <span class="icon">
+                  <i class="bi bi-envelope"></i>
+               </span>
+               <span class="box">
+                  <span class="ptext fz-18 mb-1 d-block">
+                     Email
+                  </span>
+                  <a href="mailto:devhon.contact@gmail.com">devhon.contact@gmail.com</a>
+                     devhon.contact@gmail.com
+                  </a>
+               </span>
+            </div>
+            <div class="about__contbox__item pb-30 pt-30" data-aos="fade-up" data-aos-duration="1500">
+               <span class="icon">
+                  <i class="bi bi-geo-alt"></i>
+               </span>
+               <span class="box">
+                  <span class="ptext fz-18 mb-1 d-block">
+                     Location
+                  </span>
+                  <a href="#0">
+                     Tabaco City, Albay
+                  </a>
+               </span>
+            </div>
+         </div>
+        </div>
+        <div class="col-lg-5">
+            <div class="pro__mettingthumb" data-aos="zoom-in" data-aos-duration="2000">
+               <img src="assets/img/about/personal-infothumb.jpg" alt="img">
+            </div>
+        </div>
+      </div>
+   </div>
+</section>
+<!--<< project metting one >>-->
+
+
+
+<!--<< process >>-->
+<section class="process__section pt-120 pb-120">
+   <div class="container">
+      <div class="project__head text-center">
+         <span class="common__sub" data-aos="fade-down" data-aos-duration="1000">
+           Working Process 
+         </span>
+         <h2 class="fw-500" data-aos="fade-up" data-aos-duration="1000">
+            Your dream website in just 
+           <span class="d-block">
+            a few steps
+           </span>
+         </h2>
+      </div>
+      <div class="row g-4">
+        <div class="col-lg-4 col-md-6 col-sm-6" data-aos="flip-up" data-aos-duration="500">
+         <div class="process__item">
+            <h2 class="white mb-24">
+               Concept
+            </h2>
+            <p class="mb-30 pra fz-18">
+               Understanding the client’s needs, goals, and target users to plan a clear and effective website.
+            </p>
+            <ul>
+               <li>
+                  Discuss project requirements
+               </li>
+               <li>
+                  Identify target audience and goals
+               </li>
+               <li>
+                  Plan structure and features
+               </li>
+            </ul>
+         </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" data-aos="flip-up" data-aos-duration="500">
+         <div class="process__item">
+            <h2 class="white mb-24">
+               Design
+            </h2>
+            <p class="mb-30 pra fz-18">
+               Creating a clean and user-friendly layout that fits the project’s purpose.
+            </p>
+            <ul>
+               <li>
+                  Wireframing and layout planning
+               </li>
+               <li>
+                  Choosing colors and typography
+               </li>
+               <li>
+                  Refining the overall design
+               </li>
+            </ul>
+         </div>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-6" data-aos="flip-up" data-aos-duration="500">
+         <div class="process__item">
+            <h2 class="white mb-24">
+               Development
+            </h2>
+            <p class="mb-30 pra fz-18">
+               Building the website with clean code and functional features.
+            </p>
+            <ul>
+               <li>
+                  Front-end and backend development
+               </li>
+               <li>
+                  Testing responsiveness and usability
+               </li>
+               <li>
+                  Final review and deployment
+               </li>
+            </ul>
+         </div>
+        </div>
+      </div>
+   </div>
+</section>
+<!--<< process >>-->
+
+<!--<< testimonial removed >>-->
+<!--<< blog removed >>-->
+
+<!--<< Footer >>-->
+<footer class="footer__section">
+   <div class="container">
+      <div class="footer__top pt-120 pb-120">
+          <div class="fl" data-aos="fade-up" data-aos-duration="1000">
+            Get In Touch
+         </div>
+         <div class="row g-4">
+            <div class="col-lg-6">
+               <div class="get__content">
+                  <p>
+                     Hello, I’m DevHon, Website & Game Developer.
+                  </p>
+                  <a href="mailto:devhon.contact@gmail.com">devhon.contact@gmail.com</a>
+               </div>
+            </div>
+            <div class="col-lg-6">
+               <div class="get__rightcontetn">
+                  <div class="row g-4">
+                     <div class="col-lg-6 col-md-6 col-sm-6">
+                        <a href="https://www.facebook.com/honezekielnoblebognalbal" class="social__footer">
+                           Facebook
+                           <i class="bi bi-arrow-right"></i>
+                        </a>
+                     </div>
+                     <div class="col-lg-6 col-md-6 col-sm-6">
+                        <a href="https://www.instagram.com/hon.ezekiel_/" class="social__footer">
+                           Instagram
+                           <i class="bi bi-arrow-right"></i>
+                        </a>
+                     </div>
+                     <div class="col-lg-6 col-md-6 col-sm-6">
+                        <a href="https://github.com/HonTheCoder" class="social__footer">
+                           Github
+                           <i class="bi bi-arrow-right"></i>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <div class="footer__bottom cmn__bg">
+      <div class="container">
+         <div class="copyright">
+            <p class="white"> Copyright © 2023 <a href="main.html" class="base">DevHon.</a> All rights reserved.</p>
+         </div>
+      </div>
+   </div>
+</footer>
+<!--<< Footer >>-->
+
+<!--<<  sub side bar custom >>-->
+<div class="subside__barmenu sub__contact">
+   <div class="remove__click d-flex justify-content-center align-items-center">
+      <i class="bi bi-x-lg"></i>
+   </div>
+   <div class="sub__contact__wrapper d-grid">
+      <a href="main.html" class="side-logo">
+         <img src="assets/img/logo/logo.png" alt="img">
+      </a>
+      <p>
+        Feel free to reach out if you need a website, system, or have a project in mind. 
+         I’m open to freelance work, collaborations, and new opportunities.
+      </p>
+      <div class="sub__contact-left d-grid">
+         <div class="sub__contac-item">
+            <div class="content">
+               <span class="address d-block">
+                  address
+               </span>
+               <span class="textp">
+                  Tabaco City, Albay
+               </span>
+            </div>
+         </div>
+         <div class="sub__contac-item">
+            <div class="content">
+               <span class="address d-block">
+                  email
+               </span>
+               <a href="mailto:devhon.contact@gmail.com" class="textp">
+                  devhon.contact@gmail.com
+               </a>
+            </div>
+         </div>
+         <div class="sub__contac-item">
+            <div class="content">
+               <span class="address d-block">
+                  call now
+               </span>
+               <a href="jasacript:void(0)" class="textp">
+                  09358360445
+               </a>
+            </div>
+         </div>
+      </div>
+      <div class="sub__contact-right mb-80 position-relative">
+         <ul class="social d-flex gap-3">
+            <li>
+               <a href="https://www.facebook.com/honezekielnoblebognalbal">
+                  <i class="bi bi-facebook"></i>
+               </a>
+            </li>
+            <li>
+               <a href="https://www.instagram.com/hon.ezekiel_/">
+                  <i class="bi bi-instagram"></i>
+               </a>
+            </li>
+            <li>
+               <a href="https://github.com/HonTheCoder">
+                  <i class="bi bi-github"></i>
+               </a>
+            </li>
+         </ul>
+      </div>
+      <a href="#0" class="d-flex justify-content-center fw-500 cmn--btn align-items-center gap-2">
+         <span>
+            <i class="bi bi-chevron-right"></i>             
+         </span>
+         <span class="get__text">
+            Let's Talk
+         </span>
+      </a>
+   </div>
+</div>
+<!--<<  sub side bar custom >>-->
+
+   <!--<< Scroll To Top >>-->
+   <div class="progress-wrap">
+      <svg
+         class="progress-circle svg-content"
+         width="100%"
+         height="100%"
+         viewBox="-1 -1 102 102"
+      >
+         <path fill="#c9f31d" d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+      </svg>
+      <i class="bi bi-arrow-90deg-up title topping"></i>
+   </div>
+   <!--<< Scroll To Top >>-->
+
+   <!--<< Jquery Latest >>-->
+   <script src="assets/js/jquery-3.7.0.min.js"></script>
+   <!--<< Viewport Js >>-->
+   <script src="assets/js/viewport.jquery.js"></script>
+   <!--<< Bootstrap Js >>-->
+   <script src="assets/js/bootstrap.min.js"></script>
+   <!--<< Aos animation Js >>-->
+   <script src="assets/js/aos.js"></script>
+   <!--<< Nice Select Js >>-->
+   <script src="assets/js/jquery.nice-select.min.js"></script>
+   <!--<< Swiper Slide Js >>-->
+   <script src="assets/js/swiper-bundle.min.js"></script>
+   <!--<< Swiper Bundle Js >>-->
+   <script src="assets/js/jquery.magnific-popup.min.js"></script>
+   <!--<< magnific popup Js >>-->
+   <script src="assets/js/odometer.min.js"></script>
+   <!--<< Odometer js Js >>-->
+   <script src="assets/js/wow.min.js"></script>
+   <!--<< Wow Animation js >>-->
+   <script src="assets/js/main.js"></script>
+   <!--<< Main.js >>-->
+   <script src="assets/js/cursor.js"></script>
+   <script src="assets/js/robot.js"></script>
+   <script>
+      document.addEventListener("DOMContentLoaded", function () {
+         var skillsTab = document.getElementById("skillsTab");
+         var skillsList = document.getElementById("skillsList");
+         var nextButton = document.getElementById("skillsNext");
+         var prevButton = document.getElementById("skillsPrev");
+         var indicator = document.getElementById("skillsIndicator");
+         if (!skillsTab || !skillsList || !nextButton || !prevButton || !indicator) {
+            return;
+         }
+         var skillColumns = skillsList.querySelectorAll(".col-12");
+         var perPage = 2;
+         var currentPage = 0;
+         var totalPages = Math.ceil(skillColumns.length / perPage);
+         function renderSkills() {
+            for (var i = 0; i < skillColumns.length; i++) {
+               if (i >= currentPage * perPage && i < (currentPage + 1) * perPage) {
+                  skillColumns[i].style.display = "";
+               } else {
+                  skillColumns[i].style.display = "none";
+               }
+            }
+            indicator.textContent = (currentPage + 1) + " / " + totalPages;
+         }
+         nextButton.addEventListener("click", function () {
+            currentPage = (currentPage + 1) % totalPages;
+            renderSkills();
+         });
+         prevButton.addEventListener("click", function () {
+            currentPage = (currentPage - 1 + totalPages) % totalPages;
+            renderSkills();
+         });
+         renderSkills();
+      });
+   </script>
+</body>
+</html>

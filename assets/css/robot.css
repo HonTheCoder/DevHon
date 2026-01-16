@@ -1,0 +1,177 @@
+
+/* Robot Container */
+.robot-container {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    justify-content: center; /* Centered in its column */
+    align-items: center;
+    position: relative;
+    perspective: 1000px;
+    transform: scale(1.0) translateX(0); /* Normal size, reset position */
+    z-index: 1; 
+}
+
+/* Robot Head */
+.robot-head {
+    width: 200px;
+    height: 160px;
+    background: #1a1a1a;
+    border: 2px solid #c9f31d; /* Brand Color */
+    border-radius: 40px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(201, 243, 29, 0.2);
+    animation: float 6s ease-in-out infinite;
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease-out;
+}
+
+/* Face Screen */
+.robot-face {
+    width: 160px;
+    height: 100px;
+    background: #000;
+    border-radius: 20px;
+    position: absolute;
+    top: 45%; /* Moved up slightly to make room for mouth */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(201, 243, 29, 0.1);
+}
+
+/* Mouth */
+.robot-mouth {
+    position: absolute;
+    bottom: 15px; /* Moved down */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px; /* Wider */
+    height: 25px;
+    border-bottom: 4px solid #fff; /* White for better visibility */
+    border-radius: 0 0 25px 25px;
+    box-shadow: 0 5px 15px rgba(201, 243, 29, 0.6); /* Stronger glow */
+    transition: all 0.3s ease;
+}
+
+/* Eyes */
+.robot-eye {
+    width: 40px;
+    height: 40px;
+    background: #c9f31d;
+    border-radius: 50%;
+    position: relative;
+    box-shadow: 0 0 15px #c9f31d;
+    animation: blink 4s infinite;
+    overflow: hidden; /* Keep pupil inside */
+}
+
+.pupil {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%); /* Center initially */
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+/* Antenna */
+.robot-antenna {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 40px;
+    background: #c9f31d;
+}
+
+.robot-antenna::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 16px;
+    background: #c9f31d;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #c9f31d;
+    animation: pulse 2s infinite;
+}
+
+/* Ears */
+.robot-ear {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 60px;
+    background: #333;
+    border: 1px solid #c9f31d;
+    transform: translateY(-50%);
+}
+
+.robot-ear.left {
+    left: -20px;
+    border-radius: 10px 0 0 10px;
+}
+
+.robot-ear.right {
+    right: -20px;
+    border-radius: 0 10px 10px 0;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes blink {
+    0%, 96%, 100% {
+        transform: scaleY(1);
+    }
+    98% {
+        transform: scaleY(0.1);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.2);
+    }
+    100% {
+        opacity: 0.5;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* Responsive Robot */
+@media (max-width: 991px) {
+    .robot-container {
+        height: 300px;
+        transform: scale(0.8);
+    }
+}
+
+@media (max-width: 575px) {
+    .robot-container {
+        height: 250px;
+        transform: scale(0.6);
+    }
+}

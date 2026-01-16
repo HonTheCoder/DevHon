@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>DevHon</title>
+	<link rel="shortcut icon" href="assets/img/logo/logo.png">
+	<link rel="stylesheet" href="assets/css/bootstrap.min.css">	
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			min-height: 100vh;
+			background: radial-gradient(circle at top, #141414 0, #050505 55%, #000 100%);
+			color: #ffffff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+		}
+		.welcome-area {
+			position: relative;
+			width: 100%;
+			padding: 80px 16px;
+		}
+		.hero-card {
+			max-width: 640px;
+			margin: 0 auto;
+			background: radial-gradient(circle at top left, rgba(201,243,29,0.18), transparent 55%),
+			            rgba(10,10,10,0.95);
+			border-radius: 24px;
+			padding: 40px 32px 32px;
+			box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+			border: 1px solid rgba(201,243,29,0.35);
+			backdrop-filter: blur(20px);
+			position: relative;
+			overflow: hidden;
+		}
+		.hero-card::before {
+			content: "";
+			position: absolute;
+			inset: 0;
+			background: radial-gradient(circle at top right, rgba(201,243,29,0.12), transparent 60%);
+			opacity: 0.8;
+			pointer-events: none;
+		}
+		.hero-icon {
+			width: 72px;
+			height: 72px;
+			border-radius: 50%;
+			border: 2px solid rgba(201,243,29,0.75);
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin: 0 auto 24px;
+			background: rgba(15,15,15,0.9);
+			position: relative;
+			z-index: 1;
+		}
+		.hero-icon span {
+			font-size: 36px;
+			color: #c9f31d;
+		}
+		.hero-text {
+			position: relative;
+			z-index: 1;
+		}
+		.hero-text h1 {
+			color: #ffffff;
+			font-size: 40px;
+			font-weight: 650;
+			line-height: 1.2;
+			margin-bottom: 12px;
+			text-transform: none;
+		}
+		.hero-text h3 {
+			font-size: 18px;
+			font-weight: 500;
+			color: #c9f31d;
+			margin-bottom: 20px;
+		}
+		.hero-text p {
+			font-size: 15px;
+			color: #a0a3bd;
+			margin-bottom: 24px;
+		}
+		.highlight-pill {
+			display: inline-flex;
+			align-items: center;
+			gap: 8px;
+			padding: 6px 14px;
+			border-radius: 999px;
+			border: 1px solid rgba(201,243,29,0.5);
+			background: rgba(201,243,29,0.1);
+			color: #c9f31d;
+			font-size: 13px;
+			margin-bottom: 12px;
+		}
+		.highlight-dot {
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			background: #c9f31d;
+			box-shadow: 0 0 12px rgba(201,243,29,0.8);
+		}
+		.meta-row {
+			display: flex;
+			justify-content: center;
+			gap: 24px;
+			margin-top: 12px;
+			margin-bottom: 6px;
+			color: #757899;
+			font-size: 13px;
+		}
+		.meta-row span {
+			display: inline-flex;
+			align-items: center;
+			gap: 6px;
+		}
+		.back-home {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			gap: 8px;
+			background: #c9f31d;
+			border-radius: 999px;
+			color: #050505;
+			font-weight: 600;
+			font-size: 14px;
+			padding: 10px 26px;
+			text-transform: uppercase;
+			text-decoration: none;
+			border: none;
+			position: relative;
+			margin-top: 10px;
+			transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+		}
+		.back-home:hover,
+		.back-home:focus {
+			background: #e4ff47;
+			box-shadow: 0 12px 30px rgba(201,243,29,0.45);
+			transform: translateY(-2px);
+			color: #050505;
+			text-decoration: none;
+		}
+		.back-home span.icon {
+			display: inline-flex;
+			transform: translateX(0);
+			transition: transform 0.18s ease;
+		}
+		.back-home:hover span.icon {
+			transform: translateX(3px);
+		}
+		.glow-orbit {
+			position: absolute;
+			inset: -120px;
+			background:
+				radial-gradient(circle at 0% 0%, rgba(201,243,29,0.05), transparent 60%),
+				radial-gradient(circle at 100% 100%, rgba(201,243,29,0.08), transparent 55%);
+			opacity: 0.7;
+			pointer-events: none;
+		}
+		@media (max-width: 575px) {
+			.hero-card {
+				padding: 32px 20px 24px;
+			}
+			.hero-text h1 {
+				font-size: 30px;
+			}
+			.hero-text h3 {
+				font-size: 16px;
+			}
+			.meta-row {
+				flex-direction: column;
+				align-items: center;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<section class="welcome-area">
+		<div class="glow-orbit"></div>
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-8 col-md-10 col-sm-12">
+					<div class="hero-card text-center">
+						<div class="hero-icon">
+							<span>✓</span>
+						</div>
+						<div class="hero-text">
+							<div class="highlight-pill">
+								<span class="highlight-dot"></span>
+								<span>Message sent successfully</span>
+							</div>
+							<h1>Thank you for reaching out.</h1>
+							<h3>Your message is now in my inbox.</h3>
+							<p>
+								I’ll review your email and get back to you as soon as possible.
+								In the meantime, feel free to explore more of my work and journey as a developer.
+							</p>
+							<div class="meta-row">
+								<span>
+									<span class="highlight-dot"></span>
+									<span>Reply from devhon.contact@gmail.com</span>
+								</span>
+								<span>
+									<span class="highlight-dot"></span>
+									<span>Usually responds within a short time</span>
+								</span>
+							</div>
+							<a class="back-home" href="main.html">
+								<span>Back to home</span>
+								<span class="icon">↗</span>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<script src="assets/js/bootstrap.min.js"></script>
+</body>
+</html>

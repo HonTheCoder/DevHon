@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading...</title>
+    <link rel="stylesheet" href="assets/css/global-effects.css">
+    <link rel="stylesheet" href="assets/css/cursor_styles.css">
+    <script src="assets/js/global-effects.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #050505; /* Deep dark background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: 'Courier New', Courier, monospace;
+            overflow: hidden;
+            transition: opacity 0.5s ease-out;
+        }
+
+        /* --- Terminal Styles --- */
+        .terminal-window {
+            width: 90%;
+            max-width: 500px;
+            background-color: #1a1b26; 
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            border: 1px solid #2f334d; 
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.5s ease-out forwards;
+            position: absolute; 
+            z-index: 10;
+        }
+
+        .terminal-window.close {
+            animation: scaleOut 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes scaleOut {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0.8); opacity: 0; }
+        }
+
+        .terminal-header {
+            background-color: #24283b; 
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #1f2335; 
+        }
+
+        .terminal-title {
+            color: #a9b1d6; 
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+
+        .terminal-controls {
+            display: flex;
+            gap: 8px;
+        }
+
+        .control {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .control.red { background-color: #ff5f56; }
+        .control.yellow { background-color: #ffbd2e; }
+        .control.green { background-color: #27c93f; }
+
+        .terminal-body {
+            padding: 40px 20px; 
+            min-height: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        @media (min-width: 600px) {
+            .terminal-body {
+                padding: 60px 40px; /* Restored original padding */
+            }
+        }
+
+        .typewriter {
+            color: #00ff00;
+            font-size: 18px;
+            font-weight: bold;
+            display: inline-block;
+            position: relative;
+        }
+
+        @media (min-width: 600px) {
+            .typewriter {
+                font-size: 24px;
+            }
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            height: 1.2em;
+            background-color: #00ff00; 
+            margin-left: 5px;
+            vertical-align: bottom;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .progress-bar-container {
+            width: 100%; 
+            height: 4px; 
+            background-color: #2f334d; 
+            margin-top: 20px;
+            border-radius: 2px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+            background-color: #00ff00; 
+            transition: width 0.1s linear;
+        }
+
+        /* --- Particle Canvas --- */
+        #particleCanvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 15; 
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease-in;
+        }
+
+        /* --- Big Logo Styles (THE CENTER FIX) --- */
+        .big-logo-container {
+            display: none; 
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 20;
+            justify-content: center; /* Centered horizontally */
+            align-items: center;     /* Centered vertically */
+            perspective: 1000px; 
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        /* --- Big Logo Styles (UPDATED FOR MOBILE) --- */
+        .logo-part {
+            /* Mobile: Mas maliit na default (22vw) */
+            font-size: 22vw; 
+            font-weight: 900;
+            color: #fff; 
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); 
+            opacity: 0;
+            display: inline-block; 
+            line-height: 1;
+            margin: 0;
+            padding: 0;
+        }
+
+        @media (min-width: 600px) {
+            .logo-part {
+                /* Desktop: Maintain original big size */
+                font-size: clamp(150px, 18vw, 250px); 
+            }
+        }
+
+        /* --- Original Animations --- */
+        @keyframes smashInLeft {
+            0% { transform: translateX(-200%) scale(0.5); opacity: 0; }
+            60% { transform: translateX(10%) scale(1.1); opacity: 1; }
+            100% { transform: translateX(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes smashInRight {
+            0% { transform: translateX(200%) scale(0.5); opacity: 0; }
+            60% { transform: translateX(-10%) scale(1.1); opacity: 1; }
+            100% { transform: translateX(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes electricGlow {
+            0% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+            50% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.4); }
+            100% { text-shadow: 0 0 10px rgba(255, 255, 255, 0.5); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0); }
+            10%, 30%, 50%, 70%, 90% { transform: translate(-2px, -2px); }
+            20%, 40%, 60%, 80% { transform: translate(2px, 2px); }
+        }
+
+        .logo-part.left.animate {
+            animation: smashInLeft 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards,
+                       electricGlow 2.5s ease-in-out infinite 0.8s;
+        }
+
+        .logo-part.right.animate {
+            animation: smashInRight 0.8s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards,
+                       electricGlow 2.5s ease-in-out infinite 0.8s;
+        }
+
+        .big-logo-container.shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- Cursor Canvas from main.html -->
+    <canvas id="cursorCanvas" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:99999;"></canvas>
+
+    <div class="terminal-window" id="terminalWindow">
+        <div class="terminal-header">
+            <div class="terminal-title">root@DevHon:~</div>
+            <div class="terminal-controls">
+                <div class="control red"></div>
+                <div class="control yellow"></div>
+                <div class="control green"></div>
+            </div>
+        </div>
+        <div class="terminal-body">
+            <div>
+                <span class="typewriter" id="typewriter"></span>
+                <span class="cursor" id="cursor"></span>
+            </div>
+            <div class="progress-bar-container" id="progressContainer">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+        </div>
+    </div>
+
+    <canvas id="particleCanvas"></canvas>
+    <div class="big-logo-container" id="logoContainer">
+        <div class="logo-wrapper">
+            <span class="logo-part left" id="logoLeft">Dev</span><span class="logo-part right" id="logoRight">Hon</span>
+        </div>
+    </div>
+
+    <!-- Global Effects (Cursor only, background disabled by script logic for index) -->
+    <!-- Removed duplicate links, already in head -->
+    
+    <script>
+        // --- Configuration ---
+        const text = "Connecting...";
+        const typeSpeed = 100; 
+        const progressDuration = 2000; 
+        const logoHoldDuration = 4000; 
+        
+        const terminalWindow = document.getElementById('terminalWindow');
+        const typewriterElement = document.getElementById('typewriter');
+        const cursorElement = document.getElementById('cursor');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressBar = document.getElementById('progressBar');
+        const logoContainer = document.getElementById('logoContainer');
+        const logoLeft = document.getElementById('logoLeft');
+        const logoRight = document.getElementById('logoRight');
+
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                typewriterElement.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, typeSpeed);
+            } else {
+                startProgress();
+            }
+        }
+
+        function startProgress() {
+            progressContainer.style.display = 'block';
+            let width = 0;
+            const intervalTime = 20;
+            const step = 100 / (progressDuration / intervalTime);
+            
+            const interval = setInterval(() => {
+                width += step;
+                if (width >= 100) {
+                    width = 100;
+                    clearInterval(interval);
+                    typewriterElement.textContent = "Connected!";
+                    setTimeout(closeTerminal, 1000);
+                }
+                progressBar.style.width = width + '%';
+            }, intervalTime);
+        }
+
+        function closeTerminal() {
+            terminalWindow.classList.add('close');
+            setTimeout(showBigLogo, 400);
+        }
+
+        function showBigLogo() {
+            logoContainer.style.display = 'flex';
+            initParticles();
+            document.getElementById('particleCanvas').style.opacity = '1';
+            logoLeft.classList.add('animate');
+            logoRight.classList.add('animate');
+
+            setTimeout(() => {
+                logoContainer.classList.add('shake');
+            }, 600);
+
+            setTimeout(() => {
+                document.body.style.opacity = '0';
+                setTimeout(() => {
+                    window.location.href = 'main.html';
+                }, 500);
+            }, 1000 + logoHoldDuration);
+        }
+
+        // --- Restored Original Particle System ---
+        const particleCanvas = document.getElementById('particleCanvas');
+        const ctx = particleCanvas.getContext('2d');
+        let particles = [];
+        let mouse = { x: null, y: null, radius: 150 };
+
+        window.addEventListener('mousemove', e => { mouse.x = e.x; mouse.y = e.y; });
+        const colors = ['#c9f31d', '#ffffff', '#00f0ff', '#bc13fe'];
+        
+        function resizeCanvas() {
+            particleCanvas.width = window.innerWidth;
+            particleCanvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * particleCanvas.width;
+                this.y = Math.random() * particleCanvas.height;
+                this.size = Math.random() * 3 + 1; 
+                this.speedX = Math.random() * 2 - 1;
+                this.speedY = Math.random() * 2 - 1;
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > particleCanvas.width || this.x < 0) this.speedX *= -1;
+                if (this.y > particleCanvas.height || this.y < 0) this.speedY *= -1;
+
+                if (mouse.x != null) {
+                    let dx = mouse.x - this.x;
+                    let dy = mouse.y - this.y;
+                    let distance = Math.sqrt(dx * dx + dy * dy);
+                    if (distance < mouse.radius) {
+                        this.x -= (dx / distance) * 3;
+                        this.y -= (dy / distance) * 3;
+                    }
+                }
+            }
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 10;
+                ctx.shadowColor = this.color;
+                ctx.fill();
+                ctx.shadowBlur = 0; 
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            let num = (particleCanvas.width * particleCanvas.height) / 9000;
+            for (let i = 0; i < Math.max(num, 80); i++) particles.push(new Particle());
+            animateParticles();
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, particleCanvas.width, particleCanvas.height);
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 100) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(255, 255, 255, ${0.2 - dist/500})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animateParticles);
+        }
+
+        setTimeout(type, 500);
+    </script>
+    <script src="assets/js/cursor.js"></script>
+</body>
+</html>
