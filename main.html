@@ -24,6 +24,13 @@
    <!--<< DevHon Animations >>-->
    <link rel="stylesheet" href="assets/css/devhon_animations.css">
    <script src="assets/js/global-effects.js"></script>
+   <script>
+      // Prevent going back to index.html
+      history.pushState(null, null, location.href);
+      window.onpopstate = function () {
+          history.go(1);
+      };
+   </script>
    <style>
       .skills-nav {
          border-radius: 999px;
@@ -369,7 +376,7 @@
                            <div class="exprience__box mt-30">
                               <div class="exri__item">
                                  <span class="fz-18 fw-500 base">
-                                    2022 – Present
+                                    2023 – Present
                                  </span>
                                  <div class="expri__cont">
                                     <h4 class="mb-15 text-white">
@@ -623,7 +630,7 @@
                            Started freelancing as a web developer
                         </div>
                         <div class="milestone-meta">
-                           2022 – Working with real clients and solving real problems.
+                           2023 – Working with real clients and solving real problems.
                         </div>
                      </div>
                   </li>
@@ -1056,7 +1063,7 @@
             </li>
          </ul>
       </div>
-      <a href="#0" class="d-flex justify-content-center fw-500 cmn--btn align-items-center gap-2">
+      <a href="contact.html"  class="d-flex justify-content-center fw-500 cmn--btn align-items-center gap-2">
          <span>
             <i class="bi bi-chevron-right"></i>             
          </span>

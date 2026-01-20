@@ -7,6 +7,20 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!document.getElementById('particleCanvas')) {
         initConstellationBackground();
     }
+
+    // --- Global Click Sound ---
+    const clickSound = new Audio('assets/audio/click.mp3');
+    clickSound.volume = 0.5;
+    clickSound.preload = 'auto';
+
+    document.addEventListener('click', (e) => {
+        const interactive = e.target.closest('a, button, [role="button"], input[type="submit"], .cmn--btn, .nav-link');
+        if (!interactive) return;
+        const soundClone = clickSound.cloneNode();
+        soundClone.volume = clickSound.volume;
+        soundClone.currentTime = 0;
+        soundClone.play().catch(() => {});
+    });
 });
 
 /* --- 1. Legacy DOM-based Sparkle Cursor (Restored from User Snippet) --- */

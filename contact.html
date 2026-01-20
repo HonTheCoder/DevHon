@@ -70,6 +70,122 @@
          justify-content: center;
          padding: 15px 30px;
       }
+
+      /* --- Terminal Modal Styles --- */
+      .terminal-modal-overlay {
+         display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background: rgba(5, 5, 5, 0.85);
+         backdrop-filter: blur(5px);
+         z-index: 10000;
+         justify-content: center;
+         align-items: center;
+         opacity: 0;
+         transition: opacity 0.3s ease;
+      }
+
+      .terminal-modal-overlay.active {
+         display: flex;
+         opacity: 1;
+      }
+
+      .terminal-modal {
+         background: #1a1b26;
+         border: 1px solid #c9f31d;
+         box-shadow: 0 0 20px rgba(201, 243, 29, 0.2);
+         width: 90%;
+         max-width: 500px;
+         border-radius: 8px;
+         font-family: 'Courier New', Courier, monospace;
+         overflow: hidden;
+         transform: translateY(20px);
+         transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .terminal-modal-overlay.active .terminal-modal {
+         transform: translateY(0);
+      }
+
+      .terminal-header {
+         background: #10101a;
+         padding: 10px 15px;
+         border-bottom: 1px solid #2f334d;
+         display: flex;
+         align-items: center;
+         gap: 8px;
+      }
+
+      .terminal-dot {
+         width: 12px;
+         height: 12px;
+         border-radius: 50%;
+      }
+      .terminal-dot.red { background: #ff5f56; }
+      .terminal-dot.yellow { background: #ffbd2e; }
+      .terminal-dot.green { background: #27c93f; }
+
+      .terminal-title {
+         color: #a9b1d6;
+         font-size: 14px;
+         margin-left: 10px;
+         opacity: 0.8;
+      }
+
+      .terminal-content {
+         padding: 25px;
+         color: #c9f31d;
+      }
+
+      .cmd-line {
+         margin: 5px 0;
+         font-size: 16px;
+         opacity: 0;
+         animation: fadeInLine 0.5s forwards;
+      }
+
+      .cmd-line:nth-child(1) { animation-delay: 0.2s; }
+      .cmd-line:nth-child(2) { animation-delay: 0.8s; }
+      .cmd-line:nth-child(3) { animation-delay: 1.5s; }
+      .cmd-line:nth-child(4) { animation-delay: 2.0s; }
+
+      .success-msg {
+         color: #00ff00;
+         text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+         font-weight: bold;
+         margin-top: 15px;
+         margin-bottom: 15px;
+      }
+
+      .terminal-btn {
+         background: transparent;
+         border: 1px solid #c9f31d;
+         color: #c9f31d;
+         padding: 10px 20px;
+         font-family: inherit;
+         font-size: 16px;
+         cursor: pointer;
+         margin-top: 20px;
+         width: 100%;
+         transition: all 0.3s ease;
+         opacity: 0;
+         animation: fadeInLine 0.5s forwards;
+         animation-delay: 2.5s;
+      }
+
+      .terminal-btn:hover {
+         background: #c9f31d;
+         color: #050505;
+         box-shadow: 0 0 15px rgba(201, 243, 29, 0.4);
+      }
+
+      @keyframes fadeInLine {
+         from { opacity: 0; transform: translateY(5px); }
+         to { opacity: 1; transform: translateY(0); }
+      }
    </style>
 </head>
 <body>
@@ -128,7 +244,7 @@
                </li>
             </ul>
             <div class="menu__components d-flex align-items-center">
-               <a href="contact.html" class="d-flex fw-500 cmn--btn align-items-center gap-2">
+               <a href="#contact-section" class="d-flex fw-500 cmn--btn align-items-center gap-2">
                   <span class="get__text">
                      Let's Talk
                   </span>
@@ -179,7 +295,7 @@
 <!--<< banner >>-->
 
 <!--<< Contact >>-->
-<section class="contact__section">
+<section class="contact__section" id="contact-section">
    <div class="container">
       <div class="row g-4">
          <div class="col-lg-8" data-aos="fade-up" data-aos-duration="1000">
@@ -189,10 +305,10 @@
                      Leave a Reply
                   </h3>
                   <form 
+                     id="contactForm"
                      name="enq" 
                      action="https://formspree.io/f/mkooowkz" 
                      method="POST" 
-                     onsubmit="return validation();" 
                      class="row g-4"
                   >
                      <input type="hidden" name="subject" value="New Portfolio Inquiry from {{name}}">
@@ -375,7 +491,7 @@
             </li>
          </ul>
       </div>
-      <a href="#0" class="d-flex justify-content-center fw-500 cmn--btn align-items-center gap-2">
+      <a href="#contact-section" class="d-flex justify-content-center fw-500 cmn--btn align-items-center gap-2">
          <span>
             <i class="bi bi-chevron-right"></i>             
          </span>
@@ -407,6 +523,96 @@
    <script src="assets/js/viewport.jquery.js"></script>
    <!--<< Bootstrap Js >>-->
    <script src="assets/js/bootstrap.min.js"></script>
+
+   <!-- Terminal Success Modal -->
+   <div id="terminalModal" class="terminal-modal-overlay">
+      <div class="terminal-modal">
+         <div class="terminal-header">
+            <span class="terminal-dot red"></span>
+            <span class="terminal-dot yellow"></span>
+            <span class="terminal-dot green"></span>
+            <span class="terminal-title">status_report.exe</span>
+         </div>
+         <div class="terminal-content">
+            <p class="cmd-line">> initiating_transmission...</p>
+            <p class="cmd-line">> encrypting_payload...</p>
+            <p class="cmd-line success-msg">> MESSAGE_SENT_SUCCESSFULLY</p>
+            <p class="cmd-line">> thank_you_for_contacting_devhon.</p>
+            <button id="closeModalBtn" class="terminal-btn">[ CLOSE_CONNECTION ]</button>
+         </div>
+      </div>
+   </div>
+
+   <script>
+      // AJAX Form Submission
+      const form = document.getElementById("contactForm");
+      
+      async function handleSubmit(event) {
+         event.preventDefault();
+         
+         // Run validation
+         if (!validation()) return;
+
+         const status = document.getElementById("my-form-status");
+         const submitBtn = form.querySelector("button[type='submit']");
+         const originalBtnText = submitBtn.innerHTML;
+         
+         // Set loading state
+         submitBtn.innerHTML = "Sending...";
+         submitBtn.disabled = true;
+
+         const data = new FormData(event.target);
+         
+         fetch(event.target.action, {
+            method: form.method,
+            body: data,
+            headers: {
+               'Accept': 'application/json'
+            }
+         }).then(response => {
+            if (response.ok) {
+               // Show Success Modal
+               const modal = document.getElementById('terminalModal');
+               modal.classList.add('active');
+               
+               // Reset form
+               form.reset();
+               
+               // Play success sound if desired (optional)
+               // const successSound = new Audio('assets/audio/success.mp3');
+               // successSound.play();
+            } else {
+               response.json().then(data => {
+                  if (Object.hasOwn(data, 'errors')) {
+                     alert(data["errors"].map(error => error["message"]).join(", "));
+                  } else {
+                     alert("Oops! There was a problem submitting your form");
+                  }
+               })
+            }
+         }).catch(error => {
+            alert("Oops! There was a problem submitting your form");
+         }).finally(() => {
+            // Reset button
+            submitBtn.innerHTML = originalBtnText;
+            submitBtn.disabled = false;
+         });
+      }
+      
+      form.addEventListener("submit", handleSubmit);
+
+      // Close Modal Logic
+      document.getElementById('closeModalBtn').addEventListener('click', () => {
+         document.getElementById('terminalModal').classList.remove('active');
+      });
+      
+      // Close on overlay click
+      document.getElementById('terminalModal').addEventListener('click', (e) => {
+         if (e.target === document.getElementById('terminalModal')) {
+            document.getElementById('terminalModal').classList.remove('active');
+         }
+      });
+   </script>
    <!--<< Aos animation Js >>-->
    <script src="assets/js/aos.js"></script>
    <!--<< Nice Select Js >>-->
